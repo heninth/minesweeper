@@ -47,5 +47,32 @@ function Minesweeper (config) {
       //lose();
     }
     e.target.className += ' open';
+    i = id.split('_')[1];
+    j = id.split('_')[2];
+    surround_check(i, j)
+  }
+
+  function surround_check(i, j) {
+    sum = 0;
+    // todo 
+
+    /*if (!mine['mine_' + i + '_' + j]) {
+      sum += surround_check(i, j-1);
+      sum += surround_check(i, j+1);
+      sum += surround_check(i-1, j);
+      sum += surround_check(i+1, j);
+    } else if (mine['mine_' + i + '_' + j] == false) {
+      return 1;
+    } else {
+      return 0;
+    }*/
+
+    if (sum == 0) {
+      e.target.className += ' open';
+    } else {
+      e.target.innerHTML += sum;
+      e.target.className += ' open';
+    }
+
   }
 }
