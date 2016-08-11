@@ -3,6 +3,8 @@ function Minesweeper (config) {
   var mine = {};
   init(config);
 
+  console.log(mine);
+
   function init (config) {
     var mine_field = document.getElementById('mine_field');
     var mine_row;
@@ -39,6 +41,11 @@ function Minesweeper (config) {
   }
 
   function mine_click(e) {
-    e.target.className = 'mine open';
+    var id = e.target.id;
+    if (mine[id]) {
+      e.target.className += ' exploded';
+      //lose();
+    }
+    e.target.className += ' open';
   }
 }

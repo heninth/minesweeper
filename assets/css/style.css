@@ -40,9 +40,14 @@ body {
   width: 16px;
   height: 16px;
 }
-
-.mine .open {
+.mine.open {
   border: 0;
+  border-top: 1px solid #7b7b7b;
+  border-left: 1px solid #7b7b7b;
+}
+
+.mine.exploded {
+  background-color: #f00;
 }
 
 .border {
