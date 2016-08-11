@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Minesweeper Vanilla JS</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div id="minesweeper" class="border">
+      <div id="status_bar" class="border-reverse"></div>
+      <div id="mine_field" class="border-reverse"></div>
+    </div>
+
+    <script src="assets/js/vanilla.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    var config = {
+      field_row: 30,
+      field_column: 40,
+      mine_count: 20
+    };
+    var minesweeper = new Minesweeper(config);
+    </script>
+  </body>
+</html>

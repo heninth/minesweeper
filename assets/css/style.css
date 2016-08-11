@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html, body {
+  width: 100%;
+}
+
+body {
+  text-align: center;
+  padding-top: 20px;
+}
+
+#minesweeper {
+  display: inline-block;
+  background-color: #bdbdbd;
+}
+
+#status_bar {
+  box-sizing: padding-box;
+  height: 32px;
+  margin: 8px;
+}
+
+#mine_field {
+  margin: 8px;
+  padding-bottom: 1px;
+}
+
+.mine-row {
+  width: 100%;
+  height: 16px;
+}
+
+.mine {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+}
+
+.mine .open {
+  border: 0;
+}
+
+.border {
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #7b7b7b;
+  border-right: 2px solid #7b7b7b;
+}
+
+.border-reverse {
+  border-top: 2px solid #7b7b7b;
+  border-left: 2px solid #7b7b7b;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
