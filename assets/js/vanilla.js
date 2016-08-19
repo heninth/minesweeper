@@ -1,9 +1,8 @@
-function Minesweeper (config) {
+function Minesweeper (config, debug = false) {
   var field = {};
   var mine = {};
+  var lose = false;
   init(config);
-
-  console.log(mine);
 
   function init (config) {
     var mine_field = document.getElementById('mine_field');
@@ -24,55 +23,71 @@ function Minesweeper (config) {
     }
 
     var assign_mine = 0;
-    var assign_chance = config.mine_count / (config.field_row * config.field_column);
-    while (assign_mine <= config.mine_count) {
-      for (var i = 0; i < config.field_row; i++) {
-        for (var j = 0; j < config.field_column; j++) {
-          if (Math.random() <= assign_chance) {
-            if (!mine['mine_' + i + '_' + j]) {
-              mine['mine_' + i + '_' + j] = true;
-              assign_mine++;
-              console.log(assign_mine);
-            }
-          }
-        }
+    while (assign_mine < config.mine_count) {
+
+      var i = Math.floor(Math.random() * config.field_row);
+      var j = Math.floor(Math.random() * config.field_column);
+      if (!mine['mine_' + i + '_' + j]) {
+        mine['mine_' + i + '_' + j] = true;
+        assign_mine++;
+        console.log(assign_mine);
+      }
+
+      if (debug) {
+        document.getElementById('mine_' + i + '_' + j).innerHTML = mine['mine_' + i + '_' + j] ? 'x' : '';
       }
     }
   }
 
   function mine_click(e) {
+    if (lose) return 0;
+
+    if (hasClass(e.target, 'open')) return 0;
     var id = e.target.id;
     if (mine[id]) {
-      e.target.className += ' exploded';
-      //lose();
+      e.target.className += ' open exploded';
+      lose = true;
+      return 0;
     }
-    e.target.className += ' open';
-    i = id.split('_')[1];
-    j = id.split('_')[2];
+    i = parseInt(id.split('_')[1]);
+    j = parseInt(id.split('_')[2]);
     surround_check(i, j)
   }
 
   function surround_check(i, j) {
-    sum = 0;
-    // todo 
+    var el = document.getElementById('mine_' + i + '_' + j);
+    if (!el) return 0;
+    if (hasClass(el, 'open')) return 0;
+    if (mine['mine_' + i + '_' + j]) return 0;
+    var sum = 0;
 
-    /*if (!mine['mine_' + i + '_' + j]) {
-      sum += surround_check(i, j-1);
-      sum += surround_check(i, j+1);
-      sum += surround_check(i-1, j);
-      sum += surround_check(i+1, j);
-    } else if (mine['mine_' + i + '_' + j] == false) {
-      return 1;
-    } else {
-      return 0;
-    }*/
+    if (mine['mine_' + (i-1) + '_' + (j-1)]) sum++;
+    if (mine['mine_' + (i-1) + '_' + (j)]) sum++;
+    if (mine['mine_' + (i-1) + '_' + (j+1)]) sum++;
+    if (mine['mine_' + (i) + '_' + (j-1)]) sum++;
+    if (mine['mine_' + (i) + '_' + (j+1)]) sum++;
+    if (mine['mine_' + (i+1) + '_' + (j-1)]) sum++;
+    if (mine['mine_' + (i+1) + '_' + (j)]) sum++;
+    if (mine['mine_' + (i+1) + '_' + (j+1)]) sum++;
+
+    console.log('on ' + i + ',' + j + ' : mine - ' +  mine['mine_' + i + '_' + j] + ' : sum - ' + sum);
 
     if (sum == 0) {
-      e.target.className += ' open';
+      el.className += ' open';
+
+      surround_check(i, j-1);
+      surround_check(i, j+1);
+      surround_check(i-1, j);
+      surround_check(i+1, j);
+
     } else {
-      e.target.innerHTML += sum;
-      e.target.className += ' open';
+      el.innerHTML = sum;
+      el.className += ' open';
     }
 
   }
+}
+
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
