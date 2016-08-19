@@ -2,9 +2,31 @@ function Minesweeper (config, debug = false) {
   var field = {};
   var mine = {};
   var lose = false;
+  var flag;
+  var mine_remain;
+
+  var flag_counter = [
+    document.getElementById('flag_digit1'),
+    document.getElementById('flag_digit2'),
+    document.getElementById('flag_digit3')
+  ];
+  var time_counter = [
+    document.getElementById('time_digit1'),
+    document.getElementById('time_digit2'),
+    document.getElementById('time_digit3')
+  ];
   init(config);
 
   function init (config) {
+    flag = config.mine_count;
+    mine_remain = config.mine_count;
+    flag_counter[0].className = "display_digit digit0";
+    flag_counter[1].className = "display_digit digit0";
+    flag_counter[2].className = "display_digit digit0";
+    time_counter[0].className = "display_digit digit0";
+    time_counter[1].className = "display_digit digit0";
+    time_counter[2].className = "display_digit digit0";
+
     var mine_field = document.getElementById('mine_field');
     var mine_row;
     for (var i = 0; i < config.field_row; i++) {

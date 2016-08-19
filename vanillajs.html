@@ -7,9 +7,21 @@
     <link rel="stylesheet" href="assets/css/sprite.css">
   </head>
   <body>
-    <div id="minesweeper" class="border">
-      <div id="status_bar" class="border-reverse"></div>
-      <div id="mine_field" class="border-reverse ms-minesweeper-sprite"></div>
+    <div id="minesweeper" class="border ms-minesweeper-sprite">
+      <div id="status_bar" class="border-reverse">
+        <div id="display_flag" class="display_digit_container">
+          <div id="flag_digit1" class="display_digit"></div>
+          <div id="flag_digit2" class="display_digit"></div>
+          <div id="flag_digit3" class="display_digit"></div>
+        </div>
+        <div id="play_button" class="border smile1"></div>
+        <div id="display_time" class="display_digit_container">
+          <div id="time_digit1" class="display_digit"></div>
+          <div id="time_digit2" class="display_digit"></div>
+          <div id="time_digit3" class="display_digit"></div>
+        </div>
+      </div>
+      <div id="mine_field" class="border-reverse"></div>
     </div>
 
     <script src="assets/js/vanilla.js" charset="utf-8"></script>

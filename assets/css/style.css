@@ -20,8 +20,36 @@ body {
 
 #status_bar {
   box-sizing: padding-box;
+  padding: 4px 6px;
+  display: block;
   height: 32px;
   margin: 8px;
+}
+
+.display_digit_container {
+  display: inline-block;
+  float: left;
+  width: 39px;
+  height: 23px;
+}
+
+#display_time {
+  float: right;
+}
+
+.display_digit_container .display_digit {
+  width: 13px;
+  height: 23px;
+  float: left;
+}
+
+#play_button {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  margin-top: -1px;
+  width: 23px;
+  height: 23px;
 }
 
 #mine_field {
