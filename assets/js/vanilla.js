@@ -15,6 +15,7 @@ function Minesweeper (config, debug = false) {
     document.getElementById('time_digit2'),
     document.getElementById('time_digit3')
   ];
+
   init(config);
 
   function init (config) {
@@ -56,7 +57,7 @@ function Minesweeper (config, debug = false) {
       }
 
       if (debug) {
-        document.getElementById('mine_' + i + '_' + j).innerHTML = mine['mine_' + i + '_' + j] ? 'x' : '';
+        document.getElementById('mine_' + i + '_' + j).style.backgroundColor = mine['mine_' + i + '_' + j] ? 'red' : '';
       }
     }
   }
@@ -90,36 +91,36 @@ function Minesweeper (config, debug = false) {
     i = parseInt(id.split('_')[1]);
     j = parseInt(id.split('_')[2]);
     surround_check(i, j)
-  }
 
-  function surround_check(i, j) {
-    var el = document.getElementById('mine_' + i + '_' + j);
-    if (!el) return 0;
-    if (hasClass(el, 'open')) return 0;
-    if (mine['mine_' + i + '_' + j]) return 0;
+    function surround_check(i, j) {
+      var el = document.getElementById('mine_' + i + '_' + j);
+      if (!el) return 0;
+      if (hasClass(el, 'open')) return 0;
+      if (mine['mine_' + i + '_' + j]) return 0;
 
-    var sum = 0;
+      var sum = 0;
 
-    if (mine['mine_' + (i-1) + '_' + (j-1)]) sum++;
-    if (mine['mine_' + (i-1) + '_' + (j)]) sum++;
-    if (mine['mine_' + (i-1) + '_' + (j+1)]) sum++;
-    if (mine['mine_' + (i) + '_' + (j-1)]) sum++;
-    if (mine['mine_' + (i) + '_' + (j+1)]) sum++;
-    if (mine['mine_' + (i+1) + '_' + (j-1)]) sum++;
-    if (mine['mine_' + (i+1) + '_' + (j)]) sum++;
-    if (mine['mine_' + (i+1) + '_' + (j+1)]) sum++;
+      if (mine['mine_' + (i-1) + '_' + (j-1)]) sum++;
+      if (mine['mine_' + (i-1) + '_' + (j)]) sum++;
+      if (mine['mine_' + (i-1) + '_' + (j+1)]) sum++;
+      if (mine['mine_' + (i) + '_' + (j-1)]) sum++;
+      if (mine['mine_' + (i) + '_' + (j+1)]) sum++;
+      if (mine['mine_' + (i+1) + '_' + (j-1)]) sum++;
+      if (mine['mine_' + (i+1) + '_' + (j)]) sum++;
+      if (mine['mine_' + (i+1) + '_' + (j+1)]) sum++;
 
-    if (sum == 0) {
-      el.className = 'mine border open';
-      surround_check(i, j-1);
-      surround_check(i, j+1);
-      surround_check(i-1, j);
-      surround_check(i+1, j);
-    } else {
-      el.className = 'mine border open open' + sum;
+      if (sum == 0) {
+        el.className = 'mine border open';
+        surround_check(i, j-1);
+        surround_check(i, j+1);
+        surround_check(i-1, j);
+        surround_check(i+1, j);
+      } else {
+        el.className = 'mine border open open' + sum;
+      }
     }
-
   }
+
 }
 
 function hasClass(element, cls) {
