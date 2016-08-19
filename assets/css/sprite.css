@@ -141,3 +141,12 @@
 .ms-minesweeper-sprite .smile1::before {
   background-position: 0px -33px;
 }
+.ms-minesweeper-sprite .smile2::before {
+  background-position: -17px -33px;
+}
+.ms-minesweeper-sprite .smile3::before {
+  background-position: -34px -33px;
+}
+.ms-minesweeper-sprite .smile4::before {
+  background-position: -51px -33px;
+}
