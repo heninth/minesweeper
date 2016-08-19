@@ -17,6 +17,7 @@ function Minesweeper (config, debug = false) {
         field['mine_' + i + '_' + j].id = 'mine_' + i + '_' + j;
         field['mine_' + i + '_' + j].className = 'mine border';
         field['mine_' + i + '_' + j].addEventListener("click", mine_click);
+        field['mine_' + i + '_' + j].addEventListener("contextmenu", mine_rclick);
         mine['mine_' + i + '_' + j] = false;
         mine_row.appendChild(field['mine_' + i + '_' + j]);
       }
@@ -30,7 +31,6 @@ function Minesweeper (config, debug = false) {
       if (!mine['mine_' + i + '_' + j]) {
         mine['mine_' + i + '_' + j] = true;
         assign_mine++;
-        console.log(assign_mine);
       }
 
       if (debug) {
@@ -39,13 +39,29 @@ function Minesweeper (config, debug = false) {
     }
   }
 
+  function mine_rclick(e) {
+    e.preventDefault();
+    if (lose) return 0;
+    if (hasClass(e.target, 'open')) return 0;
+    if (hasClass(e.target, 'flag')) {
+      e.target.className = 'mine border questionmask';
+      return 0;
+    }
+    if (hasClass(e.target, 'questionmask')) {
+      e.target.className = 'mine border';
+      return 0;
+    }
+    e.target.className = 'mine border flag';
+  }
+
   function mine_click(e) {
     if (lose) return 0;
 
+    if (hasClass(e.target, 'flag')) return 0;
     if (hasClass(e.target, 'open')) return 0;
     var id = e.target.id;
     if (mine[id]) {
-      e.target.className += ' open exploded';
+      e.target.className = 'mine border open exploded';
       lose = true;
       return 0;
     }
@@ -59,6 +75,7 @@ function Minesweeper (config, debug = false) {
     if (!el) return 0;
     if (hasClass(el, 'open')) return 0;
     if (mine['mine_' + i + '_' + j]) return 0;
+
     var sum = 0;
 
     if (mine['mine_' + (i-1) + '_' + (j-1)]) sum++;
@@ -70,18 +87,14 @@ function Minesweeper (config, debug = false) {
     if (mine['mine_' + (i+1) + '_' + (j)]) sum++;
     if (mine['mine_' + (i+1) + '_' + (j+1)]) sum++;
 
-    console.log('on ' + i + ',' + j + ' : mine - ' +  mine['mine_' + i + '_' + j] + ' : sum - ' + sum);
-
     if (sum == 0) {
-      el.className += ' open';
-
+      el.className = 'mine border open';
       surround_check(i, j-1);
       surround_check(i, j+1);
       surround_check(i-1, j);
       surround_check(i+1, j);
-
     } else {
-      el.className += ' open open' + sum;
+      el.className = 'mine border open open' + sum;
     }
 
   }
