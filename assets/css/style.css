@@ -37,6 +37,7 @@ body {
 .mine {
   display: inline-block;
   box-sizing: border-box;
+  position: relative;
   width: 16px;
   height: 16px;
 }

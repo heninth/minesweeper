@@ -81,8 +81,7 @@ function Minesweeper (config, debug = false) {
       surround_check(i+1, j);
 
     } else {
-      el.innerHTML = sum;
-      el.className += ' open';
+      el.className += ' open open' + sum;
     }
 
   }
