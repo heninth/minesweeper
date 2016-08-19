@@ -86,6 +86,13 @@ body {
   border-right: 2px solid #7b7b7b;
 }
 
+.border-active:active {
+  border-top: 2px solid #7b7b7b;
+  border-left: 2px solid #7b7b7b;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
 .border-reverse {
   border-top: 2px solid #7b7b7b;
   border-left: 2px solid #7b7b7b;
